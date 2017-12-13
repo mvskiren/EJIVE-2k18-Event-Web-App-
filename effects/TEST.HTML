@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Wire+One);
+
+*:focus {
+  outline: none;
+}
+
+
+body {
+  background-color:#000000;
+  text-align: center;
+ font-family: 'Wire One',, Arial, sans-serif;
+  color:#fff;
+font-size: 50px;
+  padding-top:1em;
+}
+
+* { color:#fff; text-decoration: none;}
+
+
+
+
+
+/*
+body {
+  background: #111111;
+  font-family: 'Wire One',, Arial, sans-serif;
+  font-size: 100px;
+}
+*/
+
+.neon {
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 10px #87ceeb, 0 0 15px #87ceeb, 0 0 30px deepskyblue, 0 0 30px deepskyblue, 0 0 30px deepskyblue, 0 0 40px deepskyblue, 0 0 50px deepskyblue, 0 0 60px deepskyblue, 0 0 70px deepskyblue, 0 0 80px deepskyblue, 0 0 90px deepskyblue, 0 0 100px skyblue;
+}
+
+.info {
+  margin: 0 auto;
+  text-align: center;
+  color: #87ceeb;
+  text-shadow: 0 0 10px #87ceeb, 0 0 15px #87ceeb;
+  font-size: 40px;
+}
+
+
+</style>
+
+
+
+<script>
+
+var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+</script>
+
+
+
+
+<div class="neon" contenteditable>EJIVE-2k18</div>
+<div class="info">A pragati Initiative</div>
+
+<h1>
+  <a href="" class="typewrite" data-period="2000" data-type='[ "Hi, Im Mvs Kiran.", "HELLO TO DC.", "I Love Design.", "we Love to Develop." ]'>
+    <span class="wrap"></span>
+  </a>
+</h1>
+
+
+</head>
