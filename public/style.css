@@ -1,0 +1,28 @@
+body{
+
+  font: normal 16px Arial, Helvetica, sand-serif;
+  color:#333;
+  background:#000000;
+  background-size:cover;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow:hidden;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+   -webkit-overflow-scrolling:touch;
+}
+
+
+#particles-js{
+  background-image: url("img/bg.jpg") ;
+background-position: cover;
+background-size: 100% 100%;
+  		position: fixed;
+        background-attachment: fixed;
+  margin : 0 auto;
+      width: 100%;
+      height: 100%;
+
+}
